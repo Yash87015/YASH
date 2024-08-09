@@ -3,7 +3,3 @@
 - Execute the codes in each cell to get the output.
 # yash
 # YASH
-#assignment
-git status
-
-
