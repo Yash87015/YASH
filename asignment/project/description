@@ -1,0 +1,59 @@
+**Cryptocurrency Liquidity Classification with Machine Learning**
+
+---
+
+### 📌 Overview
+
+This project aims to classify cryptocurrencies as **High Liquidity** or **Low Liquidity** assets using a supervised machine learning model. Liquidity is a critical metric in cryptocurrency markets — it affects volatility, price stability, and ease of trading. The classification helps investors and exchanges assess the market readiness of digital assets.
+
+---
+
+### 🎯 Objective
+
+* Predict whether a cryptocurrency has **high or low liquidity**
+* Build an interpretable machine learning model
+* Deploy a **Streamlit web app** using **Render** for public interaction
+
+---
+
+### 🛠️ Technologies Used
+
+* **Python** (Pandas, NumPy, Scikit-learn)
+* **Random Forest Classifier**
+* **Streamlit** (for web app interface)
+* **Google Colab** (for model training)
+* **Render** (for deployment)
+* **GitHub** (for version control)
+
+---
+
+### 📊 Dataset
+
+* Two snapshots (`March 16 & 17, 2022`) of CoinGecko data
+* Features include:
+
+  * Price
+  * Volume
+  * Market Cap
+  * % change (1h, 24h, 7d)
+* Custom engineered features:
+
+  * `log_volume`, `log_liquidity`, `momentum_3d`, etc.
+
+---
+
+### 📈 Model Performance
+
+* **Algorithm:** RandomForestClassifier
+* **Accuracy:** \~99.5%
+* **Cross-Validation Score:** 99.75%
+* **ROC-AUC:** High (plotted)
+
+---
+
+### 📦 Deployment
+
+* The final model is deployed using Streamlit on Render.
+* [🔗 Live App](https://your-app-link.onrender.com) *(update this with your link)*
+
+
