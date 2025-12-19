@@ -2,3 +2,11 @@ streamlit
 scikit-learn
 joblib
 numpy
+langchain
+chromadb
+langchain-groq
+langchain-huggingface
+langchain-community
+langchain-text-splitters
+langchain-chroma
+huggingface-hub
