@@ -1,1 +1,71 @@
+**Project Objective**
+Objective: Explore the relationship between trader performance and market sentiment, uncover hidden patterns, and deliver insights that can drive smarter trading strategies.
 
+**Data Sources**
+Link to dataset Historical Data
+https://drive.google.com/file/d/1IAfLZwu6rJzyWKgBToqwSmmVYU6VbjVs/view?usp=sharing
+
+Fear Greed Index link:
+https://drive.google.com/file/d/1PgQC0tO8XN-wqkNyghWc_-mnrYv_nhSf/view?usp=sharing
+
+This project utilizes two main datasets to achieve its objectives:
+
+Historical Data (historical_data.csv):
+Nature: This dataset contains detailed trading records, providing insights into trader performance and behavior. It includes information such as execution price, trade size (in tokens and USD), transaction side (BUY/SELL), timestamp, profit and loss (PnL), fees, and other trade-specific identifiers.
+Origin: This data is assumed to be historical trading data from a cryptocurrency exchange or similar trading platform.
+
+Fear & Greed Index (fear_greed_index.csv):
+Nature: This dataset provides daily market sentiment scores, often reflecting the general emotional state of the cryptocurrency market (e.g., Extreme Fear, Fear, Neutral, Greed, Extreme Greed).
+Origin: This data is typically sourced from financial market sentiment aggregators, which analyze various factors like volatility, market momentum, social media sentiment, and search trends to generate a composite index.
+
+
+** Methodology ** 
+
+To achieve the project objectives, the following analytical steps were undertaken:
+
+**Data Loading and Preprocessing:**
+Historical Trading Data (historical_data.csv): Loaded into a DataFrame. Key columns such as Timestamp IST and Timestamp were converted to datetime objects. Missing values and duplicates were checked to ensure data quality.
+Fear Greed Index Data (fear_greed_index.csv): Loaded into a DataFrame. The date column was converted to datetime objects, and the timestamp column was also converted to a proper datetime format. Data quality checks were performed.
+
+**Dataset Merging:**
+→ The historical_data and fear_greed_index DataFrames were merged using an inner join on their respective date columns (date), creating a comprehensive merged_df that combines trading activity with market sentiment.
+
+**Exploratory Data Analysis (EDA) by Sentiment:**
+
+→ Profitability Analysis: Calculated and visualized the average, total, median, and standard deviation of 'Closed PnL' (Profit and Loss) for each market sentiment classification. Win rates were also computed.
+Trading Behavior Analysis: Examined trade counts by Side (BUY/SELL) across different sentiment classifications to understand how trader direction changes with market mood.
+Volume Analysis: Analyzed average and total trading volume (Size USD) per sentiment to identify periods of high activity.
+
+→ Leverage Analysis: Investigated 'Start Position' and 'Size USD' by sentiment to infer potential leverage patterns, noting some ambiguity in the 'Start Position' metric.
+Predictive Modeling for Trade Profitability:
+
+→ Problem Reframing: The continuous 'Closed PnL' prediction was reframed into a binary classification task: predicting whether a trade is 'profitable' (PnL > 0) or 'not profitable' (PnL <= 0).
+
+→ Feature Engineering: Created new temporal features (hour_of_day, day_of_week, month) from Timestamp IST and an interaction feature (size_usd_x_price).
+
+→ Model Selection: A RandomForestClassifier was chosen for its robustness and ability to handle complex relationships.
+
+→ Data Preparation: Features were one-hot encoded for categorical variables, and numerical features were scaled using StandardScaler.
+
+→ Model Training and Evaluation: The data was split into training and testing sets. The model was trained and evaluated using metrics such as accuracy, precision, recall, and F1-score. Performance consistency was also checked across different parts of the unseen test data.
+
+→ Feature Importance: Analyzed feature importances from the RandomForestClassifier to identify the most influential factors in predicting trade profitability.
+
+** Highlight Key Findings and Insights**
+Profitability: Detail that 'Fear' periods showed the highest total PnL, while 'Extreme Greed' had the highest average PnL.
+Trading Behavior: Describe the contrarian patterns, noting more 'SELL' trades during 'Extreme Greed' and more 'BUY' trades during 'Extreme Fear'.
+Trading Volume: Highlight that 'Fear' sentiment was associated with the highest trading volume.
+Predictive Model Performance: State that the RandomForestClassifier achieved 96% accuracy in predicting trade profitability and mention key influential features like 'Execution Price', 'hour_of_day', and 'Size USD'.
+Overfitting: Acknowledge the evidence of overfitting (100% training accuracy vs. 96% test accuracy).
+Metric Ambiguity: Mention the ambiguity of the 'Start Position' metric and its impact on leverage interpretation.
+
+** Strategic Implications ** 
+Based on the key findings, the following actionable trading strategies can be developed to drive smarter trading decisions:
+
+Leveraging 'Fear' Periods for Profit: Periods of 'Fear' sentiment are highly active with the highest total PnL and trading volumes. Strategies should focus on identifying and capitalizing on these times, potentially through strategic buying during market downturns or by exploiting the increased volatility.
+
+Implementing Contrarian Entry/Exit Points: The analysis shows distinct contrarian patterns: an increase in 'BUY' trades during 'Extreme Fear' and an increase in 'SELL' trades during 'Extreme Greed'. Traders can implement strategies to buy into market lows during 'Extreme Fear' and take profits or initiate short positions when the market enters 'Extreme Greed'.
+
+Considering Dynamic Position Sizing: Given the high average trade size and total volume during 'Fear' periods, traders might benefit from dynamically adjusting their position sizes. This could mean taking larger, well-researched positions during these volatile, yet often profitable, periods.
+
+Incorporating Stringent Risk Management: 'Extreme Fear' and 'Greed' categories show higher standard deviations in PnL, indicating greater volatility and risk. It is crucial to implement stringent risk management techniques, such as setting stop-loss orders and carefully sizing positions, to mitigate potential losses during these heightened volatility periods.
